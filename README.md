@@ -1,7 +1,9 @@
 # Image Upload Using Multer and GridFS
-    The repo contains an api/app to upload, store and view images using multer, multer-gridfs-storage and gridfs-stream.
+    The repo contains an api/app to upload, store and view images using multer,
+    multer-gridfs-storage and gridfs-stream.
     The file names are generated using the crypto module available with Nodejs.
-    Method-Override package is used to override the POST request to DELETE request while deleting a particular file.
+    Method-Override package is used to override the POST request to DELETE request 
+    while deleting a particular file.
     Only images are rendered.
 
 ### Tech Stack
