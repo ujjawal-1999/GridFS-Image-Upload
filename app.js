@@ -8,7 +8,8 @@ const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 const methodOverride = require('method-override');
 
-
+//Dotenv configuration
+require('dotenv').config();
 
 app.set('view engine','ejs');
 
@@ -19,7 +20,7 @@ app.use(methodOverride('_method'));
 const publicDirectory = __dirname+'/public';
 app.use(express.static(publicDirectory));
 
-const conn = mongoose.createConnection('mongodb://localhost:27017/imageUploadGridFs',{
+const conn = mongoose.createConnection(process.env.MONGODB_URL,{
     useNewUrlParser:true,
     useUnifiedTopology:true,
     useCreateIndex:true
@@ -33,7 +34,7 @@ conn.once('open', ()=>{
 
 //Create Storage Object
 const storage = new GridFsStorage({
-    url: 'mongodb://localhost:27017/imageUploadGridFs',
+    url: process.env.MONGODB_URL,
     file: (req, file) => {
       return new Promise((resolve, reject) => {
         crypto.randomBytes(16, (err, buf) => {
