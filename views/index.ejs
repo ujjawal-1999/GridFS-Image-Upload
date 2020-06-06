@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/bootstrap.min.css" />
+    <style>
+        img{width:100%;height:auto;}
+    </style>
+    <title>Mongo File Upload GridFS</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 m-auto">
+                <h5 class="text-center display-4 my-4">MongoDB Image Upload Using GridFS</h5>
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <div class="custom-file mb-3">
+                        <input type="file" name="file" id="file" class="custom-file-input">
+                        <label for="file" class="custom-file-label">Choose File</label>
+                    </div>
+                    <input type="submit" value="Submit" class="btn btn-primary btn-block">
+                </form>
+                <hr>
+                <% if(files){ %>    
+                    <% files.forEach(function (file) { %>
+                        <div class="card car-body mb-3">
+                            <% if(file.isImage) {  %>
+                                <img src="image/<%= file.filename %>" alt="">
+                            <%  } else{ %>
+                                <%= file.filename %>
+                            <% } %>  
+                            <form action="/files/<%= file._id %>?_method=DELETE" method="POST">
+                                <button class="btn btn-danger btn-block mt-4">Delete</button>
+                            </form>
+                        </div>
+                    <%   })   %>    
+                <% }else { %>
+                    <p>No files to show</p>
+                <%  }  %>    
+            </div>
+        </div>
+    </div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>
